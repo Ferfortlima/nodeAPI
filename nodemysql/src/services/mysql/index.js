@@ -2,11 +2,11 @@
 const mysqlServer = require('mysql')
 
 const connection = mysqlServer.createConnection({
-  host: 'mysql556.umbler.com',
-  port: 41890,
-  user: 'fortlima',
-  password: 'fortlima1702',
-  database: 'testeapi'
+  host: process.env.MYSQL_HOST,
+  port: process.env.MYSQL_PORT,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE
 })
 
 const errorHandler = (error, msg, rejectFunction) => {
