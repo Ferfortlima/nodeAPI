@@ -9,12 +9,12 @@ const connection = mysqlServer.createConnection({
   database: 'testeapi'
 })
 
-const categories = new Promise((resolve, reject) => {
-  connection.query('SELECT * FROM categories', (error, results) => {
-    if (error) { reject(error) }
+const errorHandler = (error, msg, rejectFunction) => {
+  console.error(error)
 
-    resolve({ categories: results })
-  })
-})
+  rejectFunction({ erro: msg })
+}
 
-module.exports = categories
+const categoryModule = require('./categories')({ connection, errorHandler })
+
+module.exports = { categories: () => categoryModule }
